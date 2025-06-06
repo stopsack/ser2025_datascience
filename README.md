@@ -16,21 +16,21 @@ Total 90 minutes
 
 Konrad Stopsack (20 min)
 
-Travis watches Slido
+Emily watches Slido
 
 
 ### Use Case 2: No more moving around arrows on slides – DAGs, causal workflows, and how to build them with large-language models in 2025
 
 Travis Gerke (20 min)
 
-Emily watches Slido
+Malcolm watches Slido
 
 
 ### Use Case 3: No more digging through e-mails to understand analyses – Project organization and metadata in 2025
 
 Emily Riederer (20 min)
 
-Malcolm watches Slido
+Travis watches Slido
 
 
 ### Wrap up and Use Case 4: No more just hoping that code does what it should – Making code review efficient and educational in 2025 + GitHub including Harvard
