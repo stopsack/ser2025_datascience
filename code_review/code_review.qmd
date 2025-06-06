@@ -1,0 +1,175 @@
+---
+title: Code review for research teams 
+format:
+  hpds-slides-revealjs: default
+author: "Malcolm Barrett, Ph.D."
+institute: "Research Software Engineer"
+date: last-modified
+---
+
+# Our process
+
+## The Health Policy Data Science Lab Manual
+
+- <https://stanfordhpds.github.io/lab_manual/>
+
+![](img/qrcode.png)
+
+## Code review is better science
+
+:::{.extra-large .incremental .normal-font-face}
+- **Catch bugs** early and improve **reproducibility**
+- Share **knowledge** and raise **work visibility**
+- **Normalize mistakes**, normalize *fixing* mistakes.
+- *Continuously improve*
+:::
+
+## When should you code review?
+
+### Code Review Gates
+
+:::{.extra-large .incremental}
+- Initial data pull (e.g., a SQL query or API call)
+- Descriptive tables and figures
+- Algorithms and related tables
+- Reporting
+:::
+
+## How should you code review? 
+
+:::{.extra-large .incremental}
+- Don't wait until the end unless you like reading a single 5,000 line stream-of-consciousness R script (that doesn't run on your computer because you don't have the right packages or folders or...)
+:::
+
+## How should you code review?
+### One change at a time with version control
+### We use git and GitHub
+
+:::{.incremental}
+1. **Branch**: Create a new branch
+2. **Make Changes**: Tackle one research task or problem
+3. **Submit pull request (PR)**: Use pull requests for code review
+4. **Iterate**: Update based on reviewer feedback
+5. **Merge into main branch**: And clean up
+:::
+
+---
+
+## Roles and Responsibilities
+
+:::{.large .normal-font-face}
+- **Author:** Focus on one issue or task at a time; write complete, readable code; offer reviewer guidance on understanding and running code
+- **Reviewer:** Prioritize clarity, correctness, and reproducibility. Focus on improvement over perfection. Prioritize reviewing in a timely manner.
+:::
+
+---
+
+## Workflow agreements
+
+:::{.extra-large .incremental}
+- Follow language-specific [code workflow agreements](https://stanfordhpds.github.io/lab_manual/chapters/09-code-workflow-agreements.html), such as style guidelines
+- Offer guidance on dependencies, installation, running code
+- Re-run code from a fresh environment
+:::
+
+# Code review in practice 
+
+## Small changes are better than big changes
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/bigger_pr.png")
+```
+
+## Small changes are better than big changes
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/smaller_pr.png")
+```
+
+## Reviewing changes is easier than reviewing repositories
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/reviewing_repo.png")
+```
+
+## Reviewing changes is easier than reviewing repositories
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/reviewing_pr.png")
+```
+
+## Reviewing changes is easier than reviewing repositories
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/pr_suggestion.png")
+```
+
+## Reviewing well-scoped changes is easier than reviewing large, miscellaneous changes
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/well_scoped_pr.png")
+```
+
+## Minimize files touched to scope of changes
+
+- Unrelated changes harder to review
+- When e.g., styling code unrelated to changes, hard to tell what's actually changed
+- Keep changes scoped, regularly run styling tools
+
+## Some changes just touch a lot of files
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/many_files_changed.png")
+```
+
+## Use targetted reviews for large changes or secondary reviewers
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/targetted_review.png")
+```
+
+## Installation instructions are the best
+
+![](img/deps_instructions.png){fig-align='center'}
+
+## Learning is fun
+
+```{r}
+#| echo: false
+knitr::include_graphics("img/learning.png")
+```
+
+# Code reviewing as a researcher
+
+## Does code review merit authorship?
+
+:::{.fragment}
+![](img/ack1.png)
+![](img/ack2.png)
+![](img/ack3.png)
+:::
+
+## My collaborators don't know git
+
+- Support training
+- Use reproducible tools like Quarto to export to formats they do know 
+
+## I am the only person who writes code on my project
+
+- Branching is still better! 
+
+## I'm not an expert coder
+
+- Just leave it a little better than you found it
+
+# 
+
+![](img/qrcode.png)

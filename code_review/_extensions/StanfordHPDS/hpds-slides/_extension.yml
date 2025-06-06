@@ -1,0 +1,51 @@
+title: hpds-slides
+author: Malcolm Barrett
+version: 1.0.0
+quarto-required: ">=1.5.0"
+contributes:
+  formats:
+    revealjs:
+      logo: su_identity_red.png
+      theme: [custom.scss]
+      preview-links: true
+      chalkboard:
+        theme: whiteboard
+        boardmarker-width: 3
+        buttons: false
+      title-slide-attributes:
+        data-background-image: "hpdslogo.png"
+        data-background-position: 50% 95%
+        data-background-size: 150px
+      # allow mathjax
+      html-math-method:
+        method: mathjax
+        url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      # hide logo on section slides
+      # based on https://github.com/quarto-dev/quarto-cli/discussions/557#discussioncomment-2522814
+      include-after: |
+        <script>
+          // Grab a reference to the logo img once:
+          const logoImg = document.querySelector('img.slide-logo');
+  
+          // Helper: hide or show the logo
+          function updateLogoVisibility(current) {
+            if ( current.classList.contains('title-slide') 
+                 && current.classList.contains('level1') ) {
+              logoImg.style.display = 'none';
+            } else {
+              logoImg.style.display = '';
+            }
+          }
+  
+          // When Reveal is first ready, check which slide is active:
+          Reveal.on('ready', event => {
+            // event.currentSlide is the <section> that’s showing
+            updateLogoVisibility(event.currentSlide);
+          });
+  
+          // Whenever the slide changes, run the same check:
+          Reveal.on('slidechanged', event => {
+            updateLogoVisibility(event.currentSlide);
+          });
+        </script>
+
