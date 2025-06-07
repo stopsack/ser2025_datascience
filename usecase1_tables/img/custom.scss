@@ -1,0 +1,42 @@
+/*-- scss:defaults --*/
+$presentation-font-size-root: 30px;
+
+.reveal .slide-logo {
+  display: block;
+  position: fixed;
+  bottom: unset !important;
+  left: unset !important;
+  top: 5px;
+  right: 12px;
+  height: 100px !important;
+  width: 100x !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.slide-number, .reveal.has-logo .slide-number {
+  bottom: 14px !important;
+  right: 50px !important;
+  top: unset !important;
+  color: #777777 !important;
+}
+
+.column-margin, .margin-aside {
+  font-size: 0.1em;
+}
+
+.align-right {
+  text-align: right !important;
+}
+
+.blue {
+  color: #3975b4 !important;
+}
+
+.rotate-img img {
+  transform: rotate(90deg);
+}
+
+.table{
+  font-size: 10px !important;
+}
