@@ -3,7 +3,7 @@ title: Code review for research teams
 format:
   hpds-slides-revealjs: default
 author: "Malcolm Barrett, Ph.D."
-institute: "Research Software Engineer"
+institute: "Research Software Engineer<br/>No relevant financial relationships to disclose"
 date: last-modified
 ---
 
