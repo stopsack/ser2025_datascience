@@ -72,6 +72,10 @@ date: last-modified
 - Re-run code from a fresh environment
 :::
 
+## Pre-flight checklist
+
+![](img/pre-flight-checklist.png)
+
 # Code review in practice 
 
 ## Small changes are better than big changes
