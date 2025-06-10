@@ -146,7 +146,7 @@ Please submit your questions using the Whova App as we go along.
 ::: {.column}
 ![](img/questions1.png){height=500}
 :::
-::: {.column}
+::: {.column .fragment}
 ![](img/questions2.png){height=500}
 :::
 ::::
@@ -160,6 +160,7 @@ Professor and Chair, Department of Epidemiologic Methods and Etiologic Research
 Leibniz Institute for Prevention Research and Epidemiology -- BIPS  
 Bremen, Germany
 
+<br />
 I have no relevant financial relationships to disclose.
 
 
@@ -204,7 +205,7 @@ Elfandy *et al. Mol Cancer Res* 2019
 
 ::: {.column .fragment}
 
-### Creating epidemiologic results tables, 2025: Wish list
+### Wish list for epidemiologic results tables, 2025
 
 ::: {.incremental}
 1. Descriptive and inferential results should go hand-in-hand
@@ -368,7 +369,7 @@ tribble(
   rt_gt()
 ```
 
-## Stratified analyses and regression analyses at once {.smaller}
+## Stratified and regression analyses at once {.smaller}
 
 ```{r rifttable_stratified}
 #| echo: true
@@ -790,7 +791,7 @@ summary(
 )
 ```
 
-## Estimating and reporting adjusted risk ratios and risk differences made easy {.smaller}
+## Estimating and reporting adjusted risk ratios<br />and risk differences made easy {.smaller}
 
 ```{r risks_rifttable}
 #| echo: true
@@ -812,7 +813,7 @@ tribble(
   gt::tab_footnote(footnote = "Adjusted for hormone receptor status.")
 ```
 
-## Compare methods if you like -- in practice, simply use *g*-computation for RRs and RDs {.smaller}
+## Compare methods if you like. In practice, simply use *g*-computation for RRs and RDs {.smaller}
 
 ```{r risks_rifttable_sensitivity}
 #| echo: true
@@ -876,9 +877,9 @@ stopsack@leibniz-bips.de
 
 
 ## We are hiring!
-
+ 
 :::: {.columns}
-:::{.column width=55%}
+::: {.column width=55%}
 The [Leibniz Institute for Prevention Research and Epidemiology – BIPS]{.blue} is one of Germany’s largest and oldest research institutes focused on epidemiology.
 
 Applications are open now for our PhD Program in Epidemiology, Statistics, and Prevention and Implementation Science, with an October start date.
@@ -891,15 +892,11 @@ Applications are open now for our PhD Program in Epidemiology, Statistics, and P
 
 <br />
 
-[**Feel free to reach out about this opportunity and others.**]{.blue}
-
-::: {.align-right}
-stopsack@leibniz-bips.de
-:::
+[**Reach out about this opportunity and others**]{.blue}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopsack@leibniz-bips.de
 
 :::
-:::{.column width=45%}
-![](img/csm_bips_building-front-02_5a53a95a19.jpg)
-![](img/map-Bremen-Europe.png)
+:::{ .column width=45%}
+![](img/csm_bips_building-front-02_5a53a95a19.jpg){width=400}
+![](img/map-Bremen-Europe.png){width=400}
 :::
 ::::
