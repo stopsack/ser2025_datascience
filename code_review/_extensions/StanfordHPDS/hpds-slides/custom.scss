@@ -1,0 +1,114 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono:400,700);
+
+// fonts
+$font-family-sans-serif: "Lato", sans-serif !default;
+$font-family-serif: "Lato", serif !default;
+$font-family-monospace: "Fira Mono", monospace !default;
+
+// colors
+$maroon: #a80707 !default;
+$grayish-black: #474747 !default;
+$pink: #EC99C6 !default;
+$black: #000000 !default;
+
+$body-bg: #fff !default;
+$body-color: $black !default;
+$link-color: $grayish-black !default;
+
+$code-block-bg: #f2f2f2;
+$code-block-font-size: 0.7em;
+
+// headings
+$presentation-heading-color: $maroon !default;
+
+/*-- scss:rules --*/
+
+h1 {
+  font-family: "Fira Mono";
+  font-size: 24px;
+}
+
+// use maroon background for section slides
+.slide-background.title-slide.slide.level1 {
+  background-color: maroon !important;
+}
+
+// make h3 and below black font
+.reveal .slides h3,
+.reveal .slides h4,
+.reveal .slides h5,
+.reveal .slides h6 {
+  color: black !important;
+}
+
+.author, .date {
+  font-size: 34px;
+}
+
+.center h2 {
+  text-align: center;
+}
+
+.reveal .slides ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.reveal .slides ul li {
+  // match the h3 font‐size exactly
+  color: black;
+  font-weight: bold;
+  line-height: 1.2;
+  // space for the >
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.reveal .slides .normal-font-face ul li {
+  font-weight: normal !important;
+}
+
+.reveal .slides ul li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $maroon;
+}
+
+// control `.incremental` items: make them 25% opacity when not current
+.reveal .slides ul li.fragment.visible:not(.current-fragment) {
+  visibility: visible;
+  opacity: .25;
+}
+
+// Let images in lists be centered
+.reveal .slides ul li img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+// control Stanford logo height
+.reveal .slide-logo {
+  max-height: .75em !important;
+}
+
+// helper classes for controlling text size
+.reveal .slides .huge { font-size: 200% !important; }
+.reveal .slides .extra-large { font-size: 150% !important; }
+.reveal .slides .large { font-size: 130% !important; }
+.reveal .slides .medium { font-size: 115% !important; }
+.reveal .slides .small { font-size: 70% !important; }
+.reveal .slides .tiny { font-size: 50% !important; }
+
+.reveal .slides img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
