@@ -16,16 +16,6 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Disclosures
-
-Konrad Stopsack- none.
-
-Travis Gerke- cStructure...
-
-Emily Riederer- Capital One...
-
-Malcolm Barrett- ...
-
 ## Data Science
 
 :::: {layout-ncol=5}
