@@ -158,9 +158,8 @@ Professor and Chair, Department of Epidemiologic Methods and Etiologic Research
 Leibniz Institute for Prevention Research and Epidemiology -- BIPS  
 Bremen, Germany
 
-Leibniz Institute for Prevention Research and Epidemiology -- BIPS
+I have no relevant financial relationships to disclose.
 
-Bremen, Germany
 
 
 ## How do our analyses produce results? 
@@ -394,7 +393,7 @@ tribble(
   rt_gt()
 ```
 
-## Different exposure? No problem<br />[R, could you round meaningfully for us? Certainly]{.fragment fragment-index=7}{.smaller}
+## Different exposure? No problem {.smaller}
 
 ```{r rifttable_exposure1}
 #| echo: true
@@ -602,7 +601,7 @@ rifttable(
 * R package **gtsummary**  
   by Daniel Sjoberg
 
-* Many others, of varying quality
+* Many others, of varying scope and quality
 
 :::
 :::{.column width="52%" .fragment}
