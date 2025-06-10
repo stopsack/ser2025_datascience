@@ -110,7 +110,8 @@ Cutter Lecture, Harvard School of Public Health, December 2014
 ::: {.column}
 ![](img/headshot-konrad.jpg){width=120 height=120}
 
-Konrad Stopsack (BIPS)<br />*Epidemiologic research*
+Konrad Stopsack (BIPS)  
+*Epidemiologic research*
 
 **Table creation**
 :::
@@ -118,7 +119,8 @@ Konrad Stopsack (BIPS)<br />*Epidemiologic research*
 ::: {.column .fragment}
 ![](img/headshot-travis.jpg){width=120 height=120}
 
-Travis Gerke (PCCTC/cStructure)<br />*Clinical trials/Startup*
+Travis Gerke (PCCTC/cStructure)  
+*Clinical trials/Startup*
 
 **DAG/LLM-based causal workflows**
 :::
@@ -130,7 +132,8 @@ Travis Gerke (PCCTC/cStructure)<br />*Clinical trials/Startup*
 ::: {.column}
 ![](img/headshot-emily.jpg){width=120 height=120}
 
-Emily Riederer (Capital One)<br />*Finance*
+Emily Riederer (Capital One)  
+*Finance*
 
 **Project organization and workflows**
 :::
@@ -138,7 +141,8 @@ Emily Riederer (Capital One)<br />*Finance*
 ::: {.column .fragment}
 ![](img/headshot-malcolm.png){width=120 height=120}
 
-Malcolm Barrett (Stanford)<br />*Research/programming*
+Malcolm Barrett (Stanford)  
+*Research/programming*
 
 **Code review**
 :::
@@ -150,7 +154,9 @@ Malcolm Barrett (Stanford)<br />*Research/programming*
 
 Konrad H. Stopsack
 
-Professor and Chair, Department of Epidemiologic Methods and Etiologic Research
+Professor and Chair, Department of Epidemiologic Methods and Etiologic Research  
+Leibniz Institute for Prevention Research and Epidemiology -- BIPS  
+Bremen, Germany
 
 Leibniz Institute for Prevention Research and Epidemiology -- BIPS
 
@@ -584,15 +590,17 @@ rifttable(
 ```
 </center>
 
-##
+---
 
 :::: {.columns}
 :::{.column width="48%"}
 ### Great software for analyses and tables exists
 
-* Excel calculator **Episheet**<br />by Kenneth Rothman
+* Excel calculator **Episheet**  
+  by Kenneth Rothman
 
-* R package **gtsummary**<br />by Daniel Sjoberg
+* R package **gtsummary**  
+  by Daniel Sjoberg
 
 * Many others, of varying quality
 
@@ -621,7 +629,8 @@ rifttable(
 ![](img/idefics-design-map.png)
 
 ::: aside
-Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation in the baseline survey. *Int J Obes.* 2011;35:S3-S15.<br />Ahrens W *et al.* Cohort profile: The transition from childhood to adolescence in European children -- How I.Family extends the IDEFICS cohort. *Int J Epidemiol.* 2017;46:1394-1395.
+Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation in the baseline survey. *Int J Obes.* 2011;35:S3-S15.  
+Ahrens W *et al.* Cohort profile: The transition from childhood to adolescence in European children -- How I.Family extends the IDEFICS cohort. *Int J Epidemiol.* 2017;46:1394-1395.
 :::
 
 ## The IDEFICS/I.Family cohort: Table 1
@@ -637,7 +646,8 @@ Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation 
 ::::
 
 ::: aside
-Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation in the baseline survey. *Int J Obes.* 2011;35:S3-S15.<br />Ahrens W *et al.* Cohort profile: The transition from childhood to adolescence in European children -- How I.Family extends the IDEFICS cohort. *Int J Epidemiol.* 2017;46:1394-1395.
+Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation in the baseline survey. *Int J Obes.* 2011;35:S3-S15.  
+Ahrens W *et al.* Cohort profile: The transition from childhood to adolescence in European children -- How I.Family extends the IDEFICS cohort. *Int J Epidemiol.* 2017;46:1394-1395.
 :::
 
 ## rifttable, v0.7.1
