@@ -138,7 +138,19 @@ Malcolm Barrett (Stanford)
 :::
 ::::
 
-## Slido
+## Questions?
+
+Please submit your questions using the Whova App as we go along.
+
+:::: {.columns}
+::: {.column}
+![](img/questions1.png){height=500}
+:::
+::: {.column}
+![](img/questions2.png){height=500}
+:::
+::::
+
 
 # Use Case 1<br />No more hand-typed numbers -- Epidemiologic results tables in 2025
 
