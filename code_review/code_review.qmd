@@ -3,7 +3,7 @@ title: Code review for research teams
 format:
   hpds-slides-revealjs: default
 author: "Malcolm Barrett, Ph.D."
-institute: "Research Software Engineer<br/>No relevant financial relationships to disclose"
+institute: "Research Software Engineer<br/>No relevant financial relationships to disclose<br/><https://bit.ly/ser_code_review>"
 date: last-modified
 ---
 
@@ -133,7 +133,7 @@ knitr::include_graphics("img/well_scoped_pr.png")
 knitr::include_graphics("img/many_files_changed.png")
 ```
 
-## Use targetted reviews for large changes or secondary reviewers
+## Use targeted reviews for large changes or secondary reviewers
 
 ```{r}
 #| echo: false
@@ -163,7 +163,7 @@ knitr::include_graphics("img/learning.png")
 
 ## My collaborators don't know git
 
-- Support training
+- Support training, including for user-friendly tools like GitHub Desktop and GitKraken
 - Use reproducible tools like Quarto to export to formats they do know 
 
 ## I am the only person who writes code on my project
@@ -175,5 +175,7 @@ knitr::include_graphics("img/learning.png")
 - Just leave it a little better than you found it
 
 # 
-
+Lab Manual:
 ![](img/qrcode.png)
+
+Slides: <https://bit.ly/ser_code_review>
