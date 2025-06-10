@@ -301,7 +301,7 @@ tribble(
   rt_gt()
 ```
 
-## Sensivity analyses made easy {.smaller}
+## Sensitivity analyses made easy {.smaller}
 
 ```{r rifttable_simple}
 #| echo: true
