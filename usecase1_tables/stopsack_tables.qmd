@@ -674,6 +674,8 @@ Also...
 ::::
 
 [https://stopsack.github.io/rifttable]{.blue}
+![](img/qr-rifttable.svg){.absolute bottom=1 left=450 width=90 height=90}
+
 
 
 ## Regression models for risk ratios and risk differences
@@ -847,8 +849,12 @@ tribble(
 ![](img/risks.png)
 :::
 :::{.column}
-<br /><br /><br /><br /><br /><br /><br />
+
+<br /><br /><br /><br />
 [https://stopsack.github.io/risks]{.blue}
+
+![](img/qr-risks-package.svg){height=120 width=120}
+
 :::
 ::::
 
