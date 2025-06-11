@@ -34,7 +34,7 @@ Malcolm watches Whova Q&A
 
 Emily Riederer (20 min)
 
-[Slides - Live](https://docs.google.com/presentation/d/1oreo4heJF667urfd40qePN3MMySfBA5QoNPqqk6zSno/edit?usp=sharing)
+[Slides - Live](https://docs.google.com/presentation/d/1oreo4heJF667urfd40qePN3MMySfBA5QoNPqqk6zSno/edit?usp=sharing)    
 [Slides - PDF](usecase3_pipelines/slides-SER-pipelines.pdf)
 
 Travis watches Whova Q&A
