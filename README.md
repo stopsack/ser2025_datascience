@@ -14,32 +14,36 @@ Total 90 minutes
 ### Overview and Introduction
 ### Use Case 1: No more hand-typed numbers – Epidemiologic results tables in 2025
 
+[Slides](usecase1_tables/stopsack_tables.html)
+
 Konrad Stopsack (20 min)
 
-Emily watches Slido
+Emily watches Whova Q&A
 
 
 ### Use Case 2: No more moving around arrows on slides – DAGs, causal workflows, and how to build them with large-language models in 2025
 
 Travis Gerke (20 min)
 
-Malcolm watches Slido
+Malcolm watches Whova Q&A
 
 
 ### Use Case 3: No more digging through e-mails to understand analyses – Project organization and metadata in 2025
 
 Emily Riederer (20 min)
 
-Travis watches Slido
+Travis watches Whova Q&A
 
 
 ### Wrap up and Use Case 4: No more just hoping that code does what it should – Making code review efficient and educational in 2025 + GitHub including Harvard
 
+[Slides](code_review/code_review.html)
+
 Malcolm Barrett (20 min)
 
-Konrad watches Slido
+Konrad watches Whova Q&A
 
 
 ### Q&A (10 min)
 
-Konrad watches Slido
+Konrad watches Whova Q&A
