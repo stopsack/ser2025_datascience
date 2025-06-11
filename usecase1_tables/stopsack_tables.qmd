@@ -1,0 +1,908 @@
+---
+title: "Epidemiology is a data science – if only epidemiologists knew"
+subtitle: "Success stories of modernizing data science practice and education in epidemiology"
+author: "Konrad H. Stopsack, BIPS<br />Travis A. Gerke, cStructure<br />Emily Riederer, Capital One<br />Malcolm Barrett, Stanford University"
+date: "June 11, 2025"
+date-format: full
+format: 
+  revealjs:
+    theme: [default, img/custom.scss]
+    logo: "img/bips-logo.png"
+    slide-number: "c"
+    embed-resources: true
+    progress: false
+    transition: fade
+    transition-speed: fast
+    pdf-separate-fragments: true
+---
+
+## Data Science
+
+:::: {layout-ncol=5}
+
+::: {.left}
+
+Medicine
+
+Epidemiology
+
+Informatics
+
+Biostatistics 
+
+...
+
+:::
+
+::: {.left2}
+
+:::
+
+
+::: {.middle .align-right}
+
+Health 
+
+Population
+
+Computer
+
+Data
+
+...
+
+:::
+
+::: {.middle2 .blue}
+
+Science
+
+Science
+
+Science
+
+Science
+
+Science
+
+
+:::
+
+::: {.right}
+
+:::
+
+::::
+
+. . .
+
+
+[**Epidemiologic data science**](.blue)
+
+Caring for our data before we put it into a model or into a paper.
+
+
+## Epidemiologists care about their data
+
+![](img/Rothman Cutter 2014.png){width=80%}
+
+. . .
+
+![](img/Rothman EJE 2017.png){width=50%}
+
+::: {.aside}
+Cutter Lecture, Harvard School of Public Health, December 2014
+:::
+
+## Welcome to this SER session!
+
+:::: {.columns}
+::: {.column}
+![](img/headshot-konrad.jpg){width=120 height=120}
+
+Konrad Stopsack (BIPS)  
+*Epidemiologic research*
+
+**Table creation**
+:::
+
+::: {.column .fragment}
+![](img/headshot-travis.jpg){width=120 height=120}
+
+Travis Gerke (PCCTC/cStructure)  
+*Clinical trials/Startup*
+
+**DAG/LLM-based causal workflows**
+:::
+::::
+
+. . .
+
+:::: {.columns}
+::: {.column}
+![](img/headshot-emily.jpg){width=120 height=120}
+
+Emily Riederer (Capital One)  
+*Finance*
+
+**Project organization and workflows**
+:::
+
+::: {.column .fragment}
+![](img/headshot-malcolm.png){width=120 height=120}
+
+Malcolm Barrett (Stanford)  
+*Research/programming*
+
+**Code review**
+:::
+::::
+
+## Questions?
+
+Please submit your questions using the Whova App as we go along.
+
+:::: {.columns}
+::: {.column}
+![](img/questions1.png){height=500}
+:::
+::: {.column .fragment}
+![](img/questions2.png){height=500}
+:::
+::::
+
+
+# No more hand-typed numbers -- Epidemiologic results tables in 2025
+
+Konrad H. Stopsack
+
+Professor and Chair, Department of Epidemiologic Methods and Etiologic Research  
+Leibniz Institute for Prevention Research and Epidemiology -- BIPS  
+Bremen, Germany
+
+<br />
+I have no relevant financial relationships to disclose.
+
+
+
+## How do our analyses produce results? 
+
+1. Write code in a text editor
+![](img/cribriform1.png){.absolute right=20 top=80 width=400}
+
+::: {.fragment fragment-index=2}
+2. Submit code to a server that houses the data
+:::
+
+::: {.fragment fragment-index=3}
+3. Receive a log file containing the results
+![](img/cribriform2.png){.absolute right=30 bottom=200 width=400}
+:::
+
+::: {.fragment fragment-index=4}
+4. Type the results into Word
+![](img/cribriform3.png){.absolute height=250 bottom=100 left=35}
+:::
+
+::: aside
+Elfandy *et al. Mol Cancer Res* 2019
+:::
+
+##
+
+:::: {.columns}
+::: {.column}
+
+### This process is such a pain<br />&nbsp;
+
+::: {.incremental}
+1. It is unclear which data were read in and which code produced which result
+2. Numbers are manually transcribed and rounded
+3. Even the tiniest change to the analysis requires redoing many manual steps
+:::
+
+:::
+
+::: {.column .fragment}
+
+### Wish list for epidemiologic results tables, 2025
+
+::: {.incremental}
+1. Descriptive and inferential results should go hand-in-hand
+2. Code should produce a publication-ready table
+3. Sensitivity analyses should be easy and quick
+:::
+
+:::
+::::
+
+. . .
+
+***Let us make creating epidemiologic results tables easy, reproducible, and fun!***
+
+
+## Example data built into R
+
+`data(flchain, package = "survival")`
+
+Monoclonal gammopathy of unclear significance (MGUS) and mortality, Olmsted County, MN, 1995--2003
+
+::: aside
+Kyle R *et al.* Prevalence of monoclonal gammopathy of undetermined significance. *N Engl J Med.* 2006.
+
+Dispenzieri A *et al.* Use of nonclonal serum immunoglobulin free light chains to predict overall survival in the general population. *Mayo Clin Proc.* 2012.
+:::
+
+```{r rifttable0}
+#| echo: false
+library(tidyverse)
+library(labelled)
+data(flchain, package = "survival")
+flchain <- flchain |> 
+  as_tibble() |> 
+  mutate(
+    futime = futime / 365.25,
+    mgus_factor = factor(
+      mgus, 
+      levels = 0:1, 
+      labels = c("No MGUS", "MGUS")
+    ),
+    women = sex == "F",
+    age_group = case_when(
+      age < 65 ~ 
+        "50-<65",
+      age >= 65 & 
+        age < 80 ~ 
+        "65-80",
+      age >= 80 ~ 
+        "80+"
+    ),
+    age10 = age / 10
+  ) |> 
+  select(-flc.grp) |> 
+  rename(sample_yr = sample.yr) |> 
+  set_variable_labels(
+    women = "Women",
+    mgus_factor = "MGUS status",
+    age_group = "Age at inclusion, years"
+  )
+set.seed(123)
+```
+
+```{r rifttable_flchain}
+flchain |> 
+  slice(1:10) |> 
+  select(age, sex, sample_yr, creatinine, mgus_factor, futime, death) |> 
+  mutate(futime = format(round(futime, digits = 2), nsmall = 2)) |> 
+  rifttable::rt_gt()
+```
+
+<center>... plus `r nrow(flchain)-10` additional observations.</center>
+
+## Creating epidemiologic results tables, 2025
+
+```{r rifttable2}
+#| echo: true
+#| output-location: fragment
+library(rifttable)
+
+tribble(
+  ~type,         ~label,
+  "total",       "Participants",
+  "events/time", "Deaths/person-years",
+  "cuminc",      "10-year risk",
+  "cumincratio", "10-year risk ratio (95% CI)",
+  "hr",          "Hazard ratio (95% CI)"
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime",
+    arguments = list(list(timepoint = 10))
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+## Sensitivity analyses made easy {.smaller}
+
+```{r rifttable_simple}
+#| echo: true
+#| output-location: column-fragment
+tribble(
+  ~type,          ~label,
+  "events/total", "Deaths/participants",
+  "hr",           "Hazard ratio (95% CI)"
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime"
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+. . .
+
+```{r rifttable_confounding}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: "2,4-6"
+tribble(
+  ~type,          ~label,                      ~confounders,
+  "events/total", "Deaths/participants",       "",
+  "hr",           "Hazard ratio (95% CI)",     "",
+  "hr",           "  Creatinine-adjusted",     "+ creatinine",
+  "hr",           "  Creatinine/age-adjusted", "+ creatinine + age",
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime"
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+. . .
+
+```{r rifttable_ci}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: "2,5-7"
+tribble(
+  ~type,          ~label,                ~ci,
+  "events/total", "Deaths/participants", NA,
+  "",             "Hazard ratio",        NA,
+  "hr",           "  with 95% CI",       NA,
+  "hr",           "  with 80% CI",       0.8,
+  "hr",           "  with 99.5% CI",     0.995
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime",
+    confounders = "+ creatinine"
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+## Stratified and regression analyses at once {.smaller}
+
+```{r rifttable_stratified}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: "2,5-10,16"
+tribble(
+  ~type,          ~label,                    ~stratum,
+  "events/total", "Deaths/participants",     "",
+  "hr",           "Hazard ratio (95% CI)",   c("F", "M"),
+  "",             "*Female*",                "F",
+  "events/total", "  Deaths/participants",   "F",
+  "hr",           "  Hazard ratio (95% CI)", "F",
+  "",             "*Male*",                  "M",
+  "events/total", "  Deaths/participants",   "M",
+  "hr",           "  Hazard ratio (95% CI)", "M",
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime",
+    effect_modifier = "sex"
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+## Different exposure? No problem {.smaller}
+
+```{r rifttable_exposure1}
+#| echo: true
+#| output-location: column
+#| code-line-numbers: "13"
+tribble(
+  ~type,          ~label,                    ~stratum,
+  "events/total", "Deaths/participants",     "",
+  "hr",           "Hazard ratio (95% CI)",   c("F", "M"),
+  "",             "*Female*",                "F",
+  "events/total", "  Deaths/participants",   "F",
+  "hr",           "  Hazard ratio (95% CI)", "F",
+  "",             "*Male*",                  "M",
+  "events/total", "  Deaths/participants",   "M",
+  "hr",           "  Hazard ratio (95% CI)", "M",
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime",
+    effect_modifier = "sex"
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+
+```{r rifttable_exposure2}
+#| echo: true
+#| output-location: column
+#| code-line-numbers: "13"
+tribble(
+  ~type,          ~label,                    ~stratum,
+  "events/total", "Deaths/participants",     "",
+  "hr",           "Hazard ratio (95% CI)",   c("F", "M"),
+  "",             "*Female*",                "F",
+  "events/total", "  Deaths/participants",   "F",
+  "hr",           "  Hazard ratio (95% CI)", "F",
+  "",             "*Male*",                  "F",
+  "events/total", "  Deaths/participants",   "M",
+  "hr",           "  Hazard ratio (95% CI)", "M",
+) |> 
+  mutate(
+    exposure = "age_group",
+    event = "death",
+    time = "futime",
+    effect_modifier = "sex"
+  ) |> 
+  rifttable(data = flchain) |> 
+  rt_gt()
+```
+
+. . .
+
+::: {data-id="box1" auto-animate-delay="0" style="background: #3975b4; width: 125px; height: 5px; margin: 10px;" .absolute right=43 top=257}
+:::
+
+::: {data-id="box1" auto-animate-delay="0" style="background: #3975b4; width: 100px; height: 5px; margin: 10px;" .absolute right=100 bottom=104}
+:::
+
+::: {data-id="box1" auto-animate-delay="0" style="background: #3975b4; width: 80px; height: 5px; margin: 10px;" .absolute right=10 bottom=104}
+:::
+
+::: {.fragment fragment-index=4}
+![](img/Wilcox deer.png){.absolute top=245 left=300 width=225 height=315}
+:::
+
+::: {.fragment .align-right fragment-index=4}
+Wilcox AJ. On precision. *Epidemiology*. 15;2004:1.
+:::
+
+## rifttable's data model {.smaller}
+
+:::: {.columns}
+::: {.column}
+### The `design`
+
+```{r datamodel_design}
+#| echo: true
+#| execute: false
+design <- tribble(
+  ~type,         ~label,
+  "total",       "Participants",
+  "events/time", "Deaths/person-years",
+  "cuminc",      "10-year risk",
+  "cumincratio", "10-year risk ratio (95% CI)",
+  "hr",          "Hazard ratio (95% CI)"
+) |> 
+  mutate(
+    exposure = "mgus_factor",
+    event = "death",
+    time = "futime",
+    arguments = list(list(timepoint = 10))
+  )
+```
+
+:::
+
+::: {.column}
+
+### The `data`
+
+```{r datamodel_data}
+#| echo: false
+flchain |> 
+  select(age, sex, sample_yr, creatinine, mgus_factor, futime, death)
+```
+
+:::
+::::
+
+
+
+## rifttable's data model {.smaller}
+
+:::: {.columns}
+::: {.column}
+### The `design`
+
+```{r datamodel2_design}
+design |>
+  print(width = 70)
+```
+
+:::
+
+::: {.column}
+
+### The `data`
+
+```{r datamodel2_data}
+#| echo: false
+flchain |> 
+  select(age, sex, sample_yr, creatinine, mgus_factor, futime, death)
+```
+
+:::
+::::
+
+. . .
+
+<center>
+
+### The table produced by `rifttable()`
+
+```{r datamodel_rifttable}
+#| echo: true
+rifttable(
+  design = design,
+  data = flchain
+)
+```
+</center>
+
+
+## rifttable's data model {.smaller}
+
+:::: {.columns}
+::: {.column}
+### The `design`
+
+```{r datamodel3_design}
+design |>
+  print(width = 70)
+```
+
+:::
+
+::: {.column}
+
+### The `data`
+
+```{r datamodel3_data}
+#| echo: false
+flchain |> 
+  select(age, sex, sample_yr, creatinine, mgus_factor, futime, death)
+```
+
+:::
+::::
+
+<center>
+
+### The table produced by `rifttable()`
+
+```{r datamodel3_rifttable}
+#| echo: true
+rifttable(
+  design = design,
+  data = flchain
+) |> 
+  rt_gt()
+```
+</center>
+
+---
+
+:::: {.columns}
+:::{.column width="48%"}
+### Great software for analyses and tables exists
+
+* Excel calculator **Episheet**  
+  by Kenneth Rothman
+
+* R package **gtsummary**  
+  by Daniel Sjoberg
+
+* Many others, of varying scope and quality
+
+:::
+:::{.column width="52%" .fragment}
+### Why rifttable
+
+<br />
+
+::: {.incremental}
+* Integrates into real data analysis
+* Shows descriptive and inferential statistics side-by-side
+* Makes stratified analyses easy<br />(and table 2 fallacies hard)
+* Rounds estimates well
+* Facilitates sensitivity analyses
+* Extends with custom estimators
+* Has a website with copy-paste examples
+:::
+
+:::
+::::
+
+
+## The IDEFICS/I.Family cohort
+
+![](img/idefics-design-map.png)
+
+::: aside
+Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation in the baseline survey. *Int J Obes.* 2011;35:S3-S15.  
+Ahrens W *et al.* Cohort profile: The transition from childhood to adolescence in European children -- How I.Family extends the IDEFICS cohort. *Int J Epidemiol.* 2017;46:1394-1395.
+:::
+
+## The IDEFICS/I.Family cohort: Table 1
+
+:::: {.columns}
+:::{.column}
+![](img/idefics-table1-code.png)
+:::
+
+:::{.column .fragment}
+![](img/idefics-table1-result.png){height=450}
+:::
+::::
+
+::: aside
+Ahrens W *et al.* The IDEFICS cohort: design, characteristics and participation in the baseline survey. *Int J Obes.* 2011;35:S3-S15.  
+Ahrens W *et al.* Cohort profile: The transition from childhood to adolescence in European children -- How I.Family extends the IDEFICS cohort. *Int J Epidemiol.* 2017;46:1394-1395.
+:::
+
+## rifttable, v0.7.1
+
+:::: {.columns}
+:::{.column}
+![](img/rifttable.png)
+:::
+
+:::{.column .fragment}
+Also...
+
+* Quantiles and quantile regression
+* Ratios of continuous outcomes
+* Competing events
+* Clustering
+* Trends (slopes)
+* Stratified and joint models
+* Inverse probability-weighted estimates
+* [Regression-based risk ratios and risk differences for binary outcomes]{.fragment .highlight-blue}
+:::
+::::
+
+[https://stopsack.github.io/rifttable]{.blue}
+![](img/qr-rifttable.svg){.absolute bottom=1 left=450 width=90 height=90}
+
+
+
+## Regression models for risk ratios and risk differences
+
+> In cohort studies [...], there is little reason to consider an odds ratio. While odds ratios are not the primary measure of interest, they are frequently reported because of the statistical model used by the investigators to analyze their data.
+
+::: aside
+Rothman KJ, Huybrechts KF, Murray EJ. Epidemiology: An Introduction. 
+3^rd^ edition, Oxford University Press 2024.
+:::
+
+:::: {.columns}
+:::{.column .fragment}
+
+```{r odds}
+rr_or <- function(count_data) {
+  tribble(
+    ~type,            ~label,
+    "total",          "Total",
+    "cases/controls", "Cases/non-cases",
+    "risk",           "Risk",
+    "rr",             "Risk ratio",
+    "or",             "Odds ratio"
+  ) |> 
+    mutate(
+      exposure = "exposure",
+      outcome = "case",
+      arguments = list(list(approach = "duplicate"))
+    ) |> 
+    rifttable(
+      data = count_data |> 
+        uncount(weights = n) |> 
+        mutate(
+          exposure = factor(
+            exposure, 
+            levels = 0:1, 
+            labels = c("Unexposed", "Exposed")
+          )
+        ) |> 
+        set_variable_labels(exposure = "Exposure"),
+      risk_percent = TRUE
+    )
+}
+
+tribble(
+  ~exposure, ~case, ~n,
+  0,         1,     20,
+  0,         0,     980,
+  1,         1,     40,
+  1,         0,     960
+) |> 
+  rr_or() |>
+  rt_gt()
+```
+
+:::
+:::{.column .fragment}
+
+```{r odds2}
+tribble(
+  ~exposure, ~case, ~n,
+  0,         1,     960,
+  0,         0,     40,
+  1,         1,     980,
+  1,         0,     20
+) |> 
+  rr_or() |> 
+  rt_gt()
+```
+
+:::
+::::
+
+## Why are we still reporting odds ratios in cross-sectional and cohort studies?
+
+1. **Log-binomial models** [do not converge]{.fragment .highlight-red fragment-index=1}
+
+```{r rr1}
+#| echo: true
+#| error: true
+#| code-line-numbers: "5"
+data(breastcancer, package = "risks")
+glm(
+  formula = death ~ stage + receptor, 
+  data = breastcancer, 
+  family = binomial(link = "log")
+)
+```
+
+::: {.fragment fragment-index=2}
+2. **"Poisson" models with robust variance**
+ [often do not converge either]{.fragment .highlight-red fragment-index=3}
+:::
+
+::: {.fragment fragment-index=4}
+3. **Marginal standardization/*g*-computation/*g*-formula with time-fixed exposure** [works whenever a logistic model can be fit]{.fragment .highlight-blue fragment-index=5}
+:::
+
+::: {.fragment fragment-index=6}
+4. And there is **Miettinen's case-duplication approach**
+:::
+
+
+## We no longer need to report odds ratios in cross-sectional and cohort studies {.smaller}
+
+```{r risks}
+#| echo: true
+#| output-location: column-fragment
+library(risks)
+summary(
+  riskratio(
+    formula = death ~ stage + receptor, 
+    data = breastcancer
+  )
+)
+```
+
+## Estimating and reporting adjusted risk ratios<br />and risk differences made easy {.smaller}
+
+```{r risks_rifttable}
+#| echo: true
+#| output-location: fragment
+tribble(
+  ~type,            ~label,           
+  "outcomes/total", "Deaths/total",
+  "risk",           "Risk",    
+  "rr",             "Risk ratio (95% CI)",
+  "rd",             "Risk difference (95% CI)",
+) |> 
+  mutate(
+    outcome = "death",
+    exposure = "stage",
+    confounders = "+ receptor"
+  ) |> 
+  rifttable(data = breastcancer) |> 
+  rt_gt() |> 
+  gt::tab_footnote(footnote = "Adjusted for hormone receptor status.")
+```
+
+## Compare methods if you like. In practice, simply use *g*-computation for RRs and RDs {.smaller}
+
+```{r risks_rifttable_sensitivity}
+#| echo: true
+#| code-line-numbers: "2,6-9"
+tribble(
+  ~type,            ~label,                               ~arguments,
+  "outcomes/total", "Deaths/total",                       NA,
+  "risk",           "Risk",                               NA,
+  "",               "Risk ratio (95% CI)",                NA,
+  "rr",             "  *g*-computation, delta method CI", list(approach = "margstd_delta"),
+  "rr",             "  *g*-computation, bootstrap CI",    list(approach = "margstd_boot"),
+  "rr",             "  Poisson model, robust CI",         list(approach = "robpoisson"),
+  "rr",             "  Case-duplication approach",        list(approach = "duplicate"),
+  "rd",             "Risk difference (95% CI)",           NA,
+) |> 
+  mutate(
+    outcome = "death",
+    exposure = "stage",
+    confounders = "+ receptor"
+  ) |> 
+  rifttable(data = breastcancer) |> 
+  rt_gt() |> 
+  gt::tab_footnote(footnote = "Adjusted for hormone receptor status.")
+```
+
+
+## risks, v0.4.3
+
+:::: {.columns}
+:::{.column}
+![](img/risks.png)
+:::
+:::{.column}
+
+<br /><br /><br /><br />
+[https://stopsack.github.io/risks]{.blue}
+
+![](img/qr-risks-package.svg){height=120 width=120}
+
+:::
+::::
+
+
+## Summary: Epidemiologic results tables in 2025
+
+::: {.incremental}
+* The tables in our manuscripts can and should be made directly by software
+* Several R packages create various types of tables
+
+    + The [**rifttable**]{.blue} package is designed specifically for epidemiologists and with best-practice result reporting in mind
+    + One perk are regression models for adjusted risk ratios and risk differences for binary outcomes from the [**risks**]{.blue} package
+    
+* This automation makes table creation easier, faster, and reproducible
+
+    + We can focus on thinking about our results instead of transcribing numbers
+:::
+
+. . .
+
+[**Thank you for your attention -- Please reach out**]{.blue}
+
+::: {.align-right}
+stopsack@leibniz-bips.de
+:::
+
+
+## We are hiring!
+ 
+:::: {.columns}
+::: {.column width=55%}
+The [Leibniz Institute for Prevention Research and Epidemiology – BIPS]{.blue} is one of Germany’s largest and oldest research institutes focused on epidemiology.
+
+Applications are open now for our PhD Program in Epidemiology, Statistics, and Prevention and Implementation Science, with an October start date.
+
+::: {style="float: left; margin-right: 5px;"}
+![](img/bips-phd-program.svg){width=120 height=120}
+:::
+<br />`https://tinyurl.com/`<br />
+&nbsp;&nbsp;&nbsp;`bips-phd-program`
+
+<br />
+
+[**Reach out about this opportunity and others**]{.blue}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopsack@leibniz-bips.de
+
+:::
+:::{ .column width=45%}
+![](img/csm_bips_building-front-02_5a53a95a19.jpg){width=400}
+![](img/map-Bremen-Europe.png){width=400}
+:::
+::::
