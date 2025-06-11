@@ -25,6 +25,8 @@ Emily watches Whova Q&A
 
 Travis Gerke (20 min)
 
+[Slides](moving-arrows/index.html)
+
 Malcolm watches Whova Q&A
 
 
