@@ -143,10 +143,21 @@ Malcolm Barrett (Stanford)
 Please submit your questions using the Whova App as we go along.
 
 :::: {.columns}
-::: {.column}
+::: {.column width=40%}
+Slides are available here:
+
+`https://stopsack.github.io/ser2025_datascience`
+
+![](img/qr-ser2025datascience.svg){height=120 width=120}
+
+Direct links to useful resources will appear throughout the session.
+:::
+
+::: {.column width=30% .fragment}
 ![](img/questions1.png){height=500}
 :::
-::: {.column .fragment}
+
+::: {.column width=30% .fragment}
 ![](img/questions2.png){height=500}
 :::
 ::::
